@@ -1,0 +1,24 @@
+services:
+  redis:
+    image: redis:7.4-alpine
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:?Set REDIS_PASSWORD before starting Redis}"]
+    volumes:
+      - redis-data:/data
+  app:
+    profiles: ["app"]
+    build: .
+    depends_on: [redis]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    environment:
+      REDIS_HOST: redis
+      CUDA_VISIBLE_DEVICES: "-1"
+      REDIS_DB: ${REDIS_DB:-0}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD before starting Redis}
+      DEEPFACE_HOME: /tmp
+volumes:
+  redis-data:

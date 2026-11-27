@@ -1,0 +1,9 @@
+**
+!requirements.txt
+!requirements-demo.txt
+!main.py
+!privacy/
+!privacy/*.py
+!scripts/
+!scripts/*.py
+!student_verifier.py

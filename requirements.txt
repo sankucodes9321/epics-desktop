@@ -1,0 +1,10 @@
+-r requirements-demo.txt
+deepface==0.0.93
+tensorflow==2.15.1
+keras==2.15.0
+tf-keras==2.15.1
+opencv-python==4.10.0.84
+pytest==8.3.5
+retina-face==0.0.19
+gdown==6.5.2
+torch==2.6.0
